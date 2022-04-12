@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+typedef long long ll;
+int main()
+{
+	ll n;
+	while (cin >> n)
+	{
+		n /= 1000;
+		n %= 86400;
+		ll a = n / 3600, b = n / 60 % 60, c = n % 60;
+		printf("%02d:%02d:%02d\n", a, b, c);
+	}
+}

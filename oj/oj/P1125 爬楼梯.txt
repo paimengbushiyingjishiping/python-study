@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int r[32768] = {0};
+
+long long int result(int n)
+{
+    if(r[n]!=0)
+        return r[n];
+    return result(n-1)+result(n-2);
+}
+
+int main()
+{
+    r[0]=0;
+    r[1]=1;
+    r[2]=2;
+    int ns;
+    while(cin>>ns)
+    {
+        cout<<result(ns)<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+#define MAX_LENGTH 500
+void printArray(int data[]) {
+    for(int i = MAX_LENGTH-1; i >= 0; i--) {
+        cout<<data[i];
+    }
+    cout<<endl;
+}
+
+void sumAllCell(int res[],int cell[] ) {
+    for(int i = 0, pro = 0 ,acc = 0; i < MAX_LENGTH ; i++) {
+        pro = res[i] + cell[i] + acc;
+        res[i] = pro % 10;
+        acc = pro / 10;
+    }
+}
+
+int main() {
+    int n;
+    while(cin >> n) {
+        int res[MAX_LENGTH] = {0};
+        int cell[MAX_LENGTH] = {0};
+
+        int acc = 0,pro = 0,i=0;
+        cell[0] = 1;
+        res[0] = 1;
+        while((n - 1) > 0) {
+            for(i = 0,acc = 0 ,pro = 0; i<MAX_LENGTH; i++) {
+                pro = cell[i]*2 + acc;
+                cell[i] = pro % 10;
+                acc = pro / 10;
+            }
+            sumAllCell(res,cell);
+            n--;
+
+        }
+        printArray(res);
+
+    }
+    return 0;
+}

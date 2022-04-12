@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int n;
+    while(cin>>n) {
+        bool door[n+1]= {false};
+        int leap,starIndex=1;
+        for(int k=1; k<=n; k++) {
+            leap = k;
+            for(int i = k; i<=n; i+=leap) {
+                door[i]=!door[i];
+            }
+        }
+        bool star = true;
+        for(int i = 1; i<=n; i++) {
+            if(door[i]) {
+                if(star) {
+                    cout<<i;
+                    star=!star;
+                } else {
+                    cout<<" "<<i;
+                }
+            }
+        }
+        cout<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,24 @@
+#include<stdio.h>
+int gcd(int a,int b)
+{
+    int temp;
+    while (b!=0)
+    {temp=a%b;a=b;b=temp;}
+    return a;
+}
+int lcm(int a,int b)
+{
+    return a*b/gcd(a,b);
+}
+int main()
+{
+    int a,b,c,d,e;
+    while(scanf("%d %d %d %d",&a,&b,&c,&d)!=EOF)
+    {
+        e=lcm(b,d);
+        a*=e/b,c*=e/d;a+=c;
+        b=gcd(a,e);
+        a/=b,e/=b;
+        printf("%d/%d\n",a,e);
+    }
+}

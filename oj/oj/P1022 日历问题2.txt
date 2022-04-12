@@ -1,0 +1,30 @@
+#include<stdio.h>
+int main()
+{
+    int daytime;
+    int month_date[12]={31,28,31,30,31,30,31,31,30,31,30,31};
+    while(scanf("%d",&daytime)!=EOF)
+    {
+        int year=2007,month=10,day=10,sum;
+        sum=daytime+day;
+        while(sum>month_date[month-1])
+        {
+            if(sum>month_date[month-1])
+            {
+                sum-=month_date[month-1];
+                month++;
+                if(month==13)
+                {
+                    year++;
+                    if(year%400==0||(year%4==0&&year%100!=0))
+                    month_date[1]=29;
+                    else
+                    month_date[1]=28;
+                    month=1;
+                }
+            }
+        }
+        day=sum;
+        printf("%4d-%02d-%02d\n",year,month,day);
+    }
+ } 

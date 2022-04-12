@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<string.h>
+
+#define X 1337
+#define N 100
+
+int b[N]={0};
+
+
+void str_to_int(char p[],int q[],int length){
+    int i;
+    for(i=0;i<length;i++)
+        q[length-i-1]=p[i]-'0';
+}
+
+int compute(int a,int length,int carry,int end){
+    if(length>end)
+        return carry;
+    int k,t,i;
+    k=a%X;
+    for(i=1;i<=b[length];i++)
+        carry=(carry*k)%X;
+    for(t=1,i=1;i<=10;i++)
+        t=(t*k)%X;
+    
+    return compute(t,length+1,carry,end);
+}
+
+int main()
+{
+    int a,n;
+    char b1[N];
+    while(scanf("%d",&a)!=EOF){
+        getchar();
+        gets(b1);
+        str_to_int(b1,b,strlen(b1));
+        n=compute(a,0,1,strlen(b1)-1);
+        printf("%d\n",n);
+    }
+    return 0;
+}

@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+using namespace std;
+struct Info {
+    int id;
+    string country;
+    int playNums;
+    string state;
+};
+
+// 比较大小 
+int compareInfo(Info pre,Info last){
+    
+    if(pre.country == "China") {
+        return 1;
+    }else if(last.country == "China"){
+        return -1;
+    }
+    return pre.country.compare(last.country);
+}
+
+int main() {
+    int n;
+    while(cin >> n) {
+        int size = n;
+        Info array[n];
+        while(n-- > 0){
+            Info info;
+            cin>>info.id>>info.country>>info.playNums>>info.state;
+            array[size-n-1]=info;
+        }
+        // 简单冒泡
+        for(int i = 0 ;i < size; i++) {
+            for(int j = i+1;j<size;j++){
+                if(compareInfo(array[i],array[j]) > 0){
+                    struct Info temp;
+                    temp = array[j];
+                    array[j] = array[i];
+                    array[i] = temp;
+                }
+            }
+        }
+        // 输出信息
+        for(int i = 0 ;i <size ; i++){
+            cout<<array[i].id<<" "<<array[i].country<<" "<<array[i].playNums<<" "<<array[i].state<<" "<<endl;;  
+        }           
+    }
+    return 0;
+}

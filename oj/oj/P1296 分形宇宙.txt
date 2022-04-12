@@ -1,0 +1,44 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+#define N 3002
+#define M 3002
+using namespace std;
+char P[N][N];
+void fun(int n,int x,int y)
+{
+    int daxiao;
+    if(n==1)
+    {
+        P[x][y]='X';
+        return ;
+    }
+    daxiao=pow(3.0,n-2);
+    fun(n-1,x,y);      
+    fun(n-1,x,y+2*daxiao);       
+    fun(n-1,x+daxiao,y+daxiao);    
+    fun(n-1,x+2*daxiao,y);       
+    fun(n-1,x+2*daxiao,y+2*daxiao);  
+}
+int main()
+{
+  int i,j,n,daxiao;
+  while(cin>>n)
+  {
+    if(n==-1)
+      break;
+    daxiao=pow(3.0,n-1);
+    for(i=1;i<=daxiao;i++)
+      for(j=1;j<=daxiao;j++)
+      P[i][j]=' ';
+    fun(n,1,1);
+    for(i=1;i<=daxiao;i++)
+    {
+      for(j=1;j<=daxiao;j++)
+        cout<<P[i][j];
+      printf("\n");
+    }
+    cout<<"-"<<endl;
+  }
+  return 0;
+}

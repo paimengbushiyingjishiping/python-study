@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+void Next(char*T,int *next){
+    int i=1;
+    next[1]=0;
+    int j=0;
+    while (i<strlen(T)) {
+        if (j==0||T[i-1]==T[j-1]) {
+            i++;
+            j++;
+            next[i]=j;
+        }else{
+            j=next[j];
+        }
+    }
+}
+int KMP(char * S,char * T,int start){
+    int next[100];
+    Next(T,next);//根据模式串T,初始化next数组
+    int i=start+1;
+    int j=1;
+    while (i<=strlen(S)&&j<=strlen(T)) {
+        //j==0:代表模式串的第一个字符就和当前测试的字符不相等；S[i-1]==T[j-1],如果对应位置字符相等，两种情况下，指向当前测试的两个指针下标i和j都向后移
+        if (j==0 || S[i-1]==T[j-1]) {
+            i++;
+            j++;
+        }
+        else{
+            j=next[j];//如果测试的两个字符不相等，i不动，j变为当前测试字符串的next值
+        }
+    }
+    if (j>strlen(T)) {//如果条件为真，说明匹配成功
+        return i-(int)strlen(T)-1;
+    }
+    return -1;
+}
+char danci[200][1000];
+int hanghao[200][1000]={0};
+int geshu[200]={0};
+int main() {
+
+	int i = 0;
+	printf("请输入要查找的单词，每个单词以换行结束，所有单词输入完毕以#结束\n");
+	do{
+		scanf("%s",&danci[i]);
+		i++;
+	}while(strcmp(danci[i-1],"#")!=0);
+
+	i--;
+	FILE *fp = fopen("./demo.txt","r");
+	char buff[100000];
+
+	int line = 0;
+	while(fgets(buff , 100000 , fp)!= NULL)
+	{
+		line++;
+		int t = 0;
+		for(t = 0;t<i;t++){
+			int ans = 0;
+			int last_ans = 0;
+			while(ans!=-1&&ans<strlen(buff)){
+				ans = KMP(buff,danci[t],ans);
+				printf("t = %d ans = %d \n",t,ans);
+
+                if(ans==-1){
+                    break;
+                }
+                int flag = 1;
+                if(ans!=0){
+                    if(buff[ans-1]>='a'&&buff[ans-1]<='z'){
+                        flag = 0;
+                    }
+                    else if(buff[ans-1]>='A'&&buff[ans-1]<='Z'){
+                        flag = 0;
+                    }
+                }
+                ans+=strlen(danci[t]);
+                if(ans<strlen(buff)){
+                    if(buff[ans]>='a'&&buff[ans]<='z'){
+                            flag = 0;
+                    }
+                    else if(buff[ans]>='A'&&buff[ans]<='Z'){
+                        flag = 0;
+                    }
+                }
+                if(flag==1){
+                    hanghao[t][line]++;
+                    geshu[t]++;
+                }
+
+			}
+		}
+	}
+	getchar();
+	int t,j;
+
+	for(t = 0;t<i;t++){
+		printf("%s:\t",danci[t]);
+		for( j = 1;j<=line;j++){
+			if(hanghao[t][j]!=0){
+				printf("行[%d]:%d次\t",j,hanghao[t][j]);
+			}
+
+		}	printf("共%d次\n",geshu[t]);
+	}
+
+
+    return 0;
+}

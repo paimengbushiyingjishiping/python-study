@@ -1,0 +1,44 @@
+#include<iostream>
+#include<string.h> 
+using namespace std;
+string s;
+int n,l;
+int a[3000];
+string jiecheng(){
+    memset(a,0,sizeof(a));//需要string.h头文件 
+    string ans;
+    a[1]=1;
+    l=1;
+    for(int i=2;i<=n;i++){
+        
+        for(int j=1;j<=l;j++){
+            a[j]*=i;
+        } 
+        
+        for(int j=1;j<=l;j++){
+            
+            if(a[j]>10){
+            a[j+1]+=a[j]/10;
+            a[j]%=10;   
+            }
+        }
+        while(a[l+1]){
+            l++;
+            a[l+1]+=a[l]/10;
+            a[l]%=10;
+        }
+    }
+    //另一个大的for循环
+    for(;l>=1;l--){
+    ans+=a[l]+'0';
+    }
+    return ans;
+}
+int main()
+{
+    while(cin>>n){  
+    s=jiecheng();
+    cout<<s<<endl;
+}
+    return 0;
+}

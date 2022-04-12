@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    while(cin>>n){
+        for(int i=1;i<=n;i++){
+            cout<<i<<" ";
+            for(int j=2;j<=n;j++){
+                if(j%2==0){
+                    cout<<j*n+1-i<<" "; 
+                }else{
+                    cout<<(j-1)*n+i<<" "; 
+                }
+            }
+            cout<<endl;
+        }
+        cout<<endl;
+    }
+   return 0;
+}

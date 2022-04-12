@@ -1,0 +1,18 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+double getMoney(double interest,double preMonthMoney,int leftMonth) {
+    if(leftMonth == 0) {
+        return 0;
+    }
+    return (getMoney(interest, preMonthMoney,leftMonth-1)+preMonthMoney)/(interest/12.0+1.00);
+}
+int main() {
+    double m;
+    const double interest = 0.0171d; 
+    while(cin>>m) {
+        double res = getMoney(interest,m,48);
+        cout << fixed << setprecision(2) << res << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,21 @@
+#include <stdio.h>
+int N, num[1024];
+int main()
+{
+    scanf("%d", &N);
+    for (int i = 1; i <= N; i++)
+        scanf("%d", &num[i]);
+    int ans = num[1];
+    for (int i = 1; i <= N; i++) {
+        for (int j = i; j <= N; j++) {
+            int s = 0;
+            for (int k = i; k <= j; k++) {
+                s += num[k];
+            }
+            if (s > ans) ans = s;
+        }
+    }
+    printf("%d\n", ans);
+
+    return 0;
+}

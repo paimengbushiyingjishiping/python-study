@@ -1,0 +1,27 @@
+ #include<iostream>
+  using namespace std;
+  int main(){
+      int n,m;
+      while(cin>>n>>m){
+          int a[10000];
+         int i,j,p,ns=3;
+          a[1]=1;
+          a[2]=2;
+         for(i=3;i<=n;i++){
+             p=i;
+            while(p%2==0){
+                 p=p/2; 
+             }
+             while(p%3==0){
+                 p=p/3;
+             }
+             if(p==1){
+                 a[ns]=i;
+                 ns++;
+             }
+         }
+         ns=ns-1;
+         cout<<ns<<endl;
+         cout<<a[m]<<endl;
+     } 
+ } 

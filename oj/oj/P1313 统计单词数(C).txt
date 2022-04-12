@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<string.h>
+void deletechar(char *str)
+{
+    int i;
+    for(i = 0;i < strlen(str);i++)
+    {
+        str[i] = str[i + 1];
+    }
+}
+
+int main()
+{
+    char str[1001],*t;
+    int n = 1;
+    while(gets(str) != NULL)
+    {
+        n = 1;
+        while(strchr(str,' ') != NULL)
+        {
+            t = strchr(str,' ');
+            deletechar(t);
+            if(t[0] != ' ' && t[0] != '\0') n++;
+        }
+        printf("%d",n);
+    }
+    return 0;
+}

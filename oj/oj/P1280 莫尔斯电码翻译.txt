@@ -1,0 +1,64 @@
+#include <iostream>
+#include <map>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    map<char, string> mapping;
+    mapping.insert(pair<char, string>('A', ".-"));
+    mapping.insert(pair<char, string>('B', "-..."));
+    mapping.insert(pair<char, string>('C', "-.-."));
+    mapping.insert(pair<char, string>('D', "-.."));
+    mapping.insert(pair<char, string>('E', "."));
+    mapping.insert(pair<char, string>('F', "..-."));
+    mapping.insert(pair<char, string>('G', "--."));
+    mapping.insert(pair<char, string>('H', "...."));
+    mapping.insert(pair<char, string>('I', ".."));
+    mapping.insert(pair<char, string>('J', ".---"));
+    mapping.insert(pair<char, string>('K', "-.-"));
+    mapping.insert(pair<char, string>('L', ".-.."));
+    mapping.insert(pair<char, string>('M', "--"));
+    mapping.insert(pair<char, string>('N', "-."));
+    mapping.insert(pair<char, string>('O', "---"));
+    mapping.insert(pair<char, string>('P', ".--."));
+    mapping.insert(pair<char, string>('Q', "--.-"));
+    mapping.insert(pair<char, string>('R', ".-."));
+    mapping.insert(pair<char, string>('S', "..."));
+    mapping.insert(pair<char, string>('T', "-"));
+    mapping.insert(pair<char, string>('U', "..-"));
+    mapping.insert(pair<char, string>('V', "...-"));
+    mapping.insert(pair<char, string>('W', ".--"));
+    mapping.insert(pair<char, string>('X', "-..-"));
+    mapping.insert(pair<char, string>('Y', "-.--"));
+    mapping.insert(pair<char, string>('Z', "--.."));
+    mapping.insert(pair<char, string>('0', ".----"));
+    mapping.insert(pair<char, string>('1', "..---"));
+    mapping.insert(pair<char, string>('2', "...--"));
+    mapping.insert(pair<char, string>('3', "....-"));
+    mapping.insert(pair<char, string>('4', "....."));
+    mapping.insert(pair<char, string>('5', "-...."));
+    mapping.insert(pair<char, string>('6', "--..."));
+    mapping.insert(pair<char, string>('7', "---.."));
+    mapping.insert(pair<char, string>('8', "----."));
+    mapping.insert(pair<char, string>('9', "-----"));
+    
+    string s;
+    while(cin>>s){
+        bool isFirst = true;
+        map<char, string>::iterator iter;
+        for(int i=0;i<s.length();i++){
+            if(isFirst){
+                isFirst=!isFirst;
+                iter = mapping.find(s[i]);
+                cout<<iter->second;
+            }else{
+                iter = mapping.find(s[i]);
+                cout<<"==="<<iter->second;
+            }
+        }
+        cout<<endl;
+    }
+   return 0;
+}

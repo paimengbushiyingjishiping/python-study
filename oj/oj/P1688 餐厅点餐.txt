@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+void initData(int p[],int length) {
+    int size = length;
+    while(length-->0) {
+        cin>>p[size-length-1];
+    }
+}
+
+void setValue(int p[],int index,int value) {
+    p[index]=value;
+}
+
+void printf(int d[],int length) {
+    while(length-->0) {
+        cout<<d[length]<<",";
+    }
+    cout<<endl;
+
+}
+
+
+int main() {
+    int n;
+    cin>>n;
+    while(n-->0) {
+        // 第n组测试数据
+        int soupTypeNum,foodTypeNum,noodleTypeNum,meatTypeNum,vegeTypeNum;
+        cin>> soupTypeNum >> foodTypeNum >> noodleTypeNum >> meatTypeNum >>vegeTypeNum;
+        meatTypeNum++;
+        vegeTypeNum++;
+        int soups[soupTypeNum], foods[foodTypeNum],noodles[noodleTypeNum],meats[meatTypeNum],veges[vegeTypeNum];
+        initData(soups,soupTypeNum);
+        initData(foods,foodTypeNum);
+        initData(noodles,noodleTypeNum);
+        initData(meats,meatTypeNum-1);
+        initData(veges,vegeTypeNum-1);
+
+
+        meats[meatTypeNum-1]=0;
+        veges[vegeTypeNum-1]=0;
+
+        int min,max;
+        cin>>min>>max;
+        int res=0,v=0;
+        for(int meat_i = 0 ; meat_i < meatTypeNum; meat_i++) {
+            for(int meat_j = meat_i +1; meat_j<meatTypeNum; meat_j++) {
+                for(int vege_i = 0 ; vege_i < vegeTypeNum; vege_i++) {
+                    for(int vege_j = vege_i +1; vege_j<vegeTypeNum; vege_j++) {
+                        // 难过
+                        for(int noodle_i = 0 ; noodle_i<noodleTypeNum; noodle_i++) {
+                            v = noodles[noodle_i]+meats[meat_i]+meats[meat_j]+veges[vege_i]+veges[vege_j];
+                            if(v>=min&&v<=max) {
+                                res++;
+
+                            }
+                        }
+                        // 开心
+                        for(int food_i = 0 ; food_i < foodTypeNum; food_i++) {
+                            for(int soup_i = 0 ; soup_i< soupTypeNum; soup_i++) {
+                                v = soups[soup_i]+foods[food_i]+meats[meat_i]+meats[meat_j]+veges[vege_i]+veges[vege_j];
+                                if(v>=min&&v<=max) {
+                                    res++;
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+        cout<<res<<endl;
+    }
+
+    return 0;
+}

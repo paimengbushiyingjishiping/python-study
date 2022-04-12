@@ -1,0 +1,55 @@
+#include<cstdio>
+ #include<cstring>
+ #include<iostream>
+ using namespace std;
+ int n,mj,mi,x,y;
+ char a[101];
+ void move(int i)
+ {
+     a[mj] = a[i];
+     a[mj + 1] = a[i + 1];
+     a[i] = '-';
+     a[i + 1] = '-';
+     mj = i;
+     for(i = 0; i < 2 * n + 2; i++)
+         //printf("%c", a[i]);
+         if(a[i]=='-'){
+             cout<<i+1<<","<<i+2<<"-->"<<x<<","<<y;
+             x=i+1;
+             y=i+2;
+             break;
+         }
+     printf("\n");
+ }
+ void fun(int n)
+ {
+     if (n == 4){        
+         move(3);move(7); 
+         move(1);move(6);
+         move(0);
+     }
+     else{
+         move(n - 1);
+         move(2 * n - 2);
+         fun(n - 1);
+     }
+ }
+ int main()
+ {
+     int i, j;
+     while(cin>>n){
+         mi = 1;
+         mj = 2* n;
+         for(i = 0; i < n; i++)
+             a[i] = 'o';
+      
+         for(i = n; i < 2 * n; i++)
+             a[i] = '*';
+         a[2*n] = '-';
+         a[2*n + 1] = '-';
+         x=2*n+1;
+         y=2*n+2;
+         fun(n);
+     }
+     return 0;
+ }

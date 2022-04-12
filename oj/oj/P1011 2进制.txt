@@ -1,0 +1,23 @@
+#include <stdio.h>
+int main() 
+{
+    int n,i,j,k,l,m;
+    scanf("%d",&n);
+    while(n--)
+    {
+        k=0;
+        l=0;
+        scanf("%d",&i);
+        while(i)
+        {
+            j=i%2;
+            i=i/2;
+            l++;
+            if(l>1)
+            for(m=1;m<l;m++)
+            j*=10;
+            k+=j;
+        }
+        printf("%d\n",k);
+    }
+}

@@ -1,0 +1,33 @@
+#include <iostream>
+#include <iomanip>
+using namespace std; 
+int main() {
+    char spilt;
+    int n,m,t;
+    while(cin>>n>>spilt>>m>>t) {
+
+        int integer = n/m,size = t;;
+        cout<<integer<<".";
+        int decimal[size]={0};
+        do {
+            n=(n%m)*10; 
+            decimal[size-t]=n/m;
+            t--;
+        }while(t != 0);
+        
+         
+        int maxLength = 0;
+        for(int i = size-1; i>=0 ; i--){
+            if(decimal[i]!=0){
+                maxLength = i;
+                break;
+            }
+        }
+        for(int i=0; i<= maxLength;i++){
+            cout<<decimal[i];
+        }
+        cout<<endl;
+    }
+    return 0;
+
+}

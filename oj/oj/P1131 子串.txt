@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <string.h>
+char str[100][101];
+int n,min,minl;
+void strrevf(char* a)
+{
+    char* l = a;
+    char* r = a;
+    while(*r) r++;
+    r --;
+    char tmp;
+    while(r > l)
+    {
+        tmp = *r;
+        *r = *l;
+        *l = tmp;
+        r--;
+        l++;
+    }
+}
+
+int solve()
+{
+    int res = minl,i,j,found;
+    char substr[101],revsubstr[101];
+    while(res)
+    {
+        for(i = 0;i <= minl - res;i++)
+        {
+            strncpy(substr,&str[min][i],res);
+            strcpy(revsubstr,substr);
+            substr[res] = revsubstr[res] = '\0';
+            strrevf(revsubstr);
+            found = 1;
+            for(j = 0;j < n;j++)
+                if(strstr(str[j],substr)==NULL && strstr(str[j],revsubstr)==NULL)
+                {
+                    found = 0;
+                    break;
+                }
+            if(found)
+                return res;
+        }
+        res--;
+    }
+    return 0;
+}
+int main()
+{
+    int t,i;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        min = 0;
+        minl = 1000;
+        for(i = 0;i < n;i++)
+        {
+            scanf("%s",str[i]);
+            if(strlen(str[i]) < minl)
+            {
+                min = i;
+                minl = strlen(str[i]);
+            }
+        }
+        printf("%d\n",solve());
+    }
+    return 0;
+}

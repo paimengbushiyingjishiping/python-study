@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    int n,t;
+    while(cin>>n>>t){
+
+        int size = n+1;
+        int w[size]={0};
+        while(size-->1){
+            cin>>w[size];
+        }
+        
+        int f[t+1]={0};
+        for (int i = 1; i < n+1; i++){
+             for (int l = t; l >= w[i]; l--) {
+                 f[l] = max(f[l], f[l - w[i]] + 1);
+             }
+        }
+        
+        int max=0;
+        for(int i=0;i<=t;i++){
+            if(max<f[i]){
+                max=f[i];
+            }
+        }
+        cout<<max<<endl;
+    
+        
+    }
+   return 0;
+}

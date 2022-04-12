@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+#define MA_LENGTH 100000
+
+int main() {
+    char s[MA_LENGTH],t[MA_LENGTH];
+    while(  cin >> s >> t) {
+        int s_i= 0,t_i=0;
+        for(; s[s_i]!='\0'; s_i++) {
+            for(; t[t_i]!='\0'; t_i++) {
+                if(t[t_i] == s[s_i]) {
+                    s_i++;
+                    continue;
+                }
+            }
+            if(t[t_i]=='\0') {
+                break;
+            }
+        }
+        if(s[s_i]=='\0') {
+            cout << "Yes"<<endl;
+        } else {
+            cout << "No"<<endl;
+        }
+    }
+    return 0;
+}

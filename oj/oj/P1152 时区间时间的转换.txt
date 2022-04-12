@@ -1,0 +1,122 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <map>
+using namespace std;
+
+map<string,float> _timezone;
+
+void _init(void);
+
+int main()
+{
+    _timezone["UTC"] = 0;
+    _timezone["GMT"] = 0;
+    _timezone["BST"] = 2;
+    _timezone["IST"] = 2;
+    _timezone["WET"] = 0;
+    _timezone["WEST"] = 2;
+    _timezone["CET"] = 2;
+    _timezone["CEST"] = 4;
+    _timezone["EET"] = 4;
+    _timezone["EEST"] = 6;
+    _timezone["MSK"] = 6;
+    _timezone["MSD"] = 8;
+    _timezone["AST"] = -8;
+    _timezone["ADT"] = -6;
+    _timezone["NST"] = -7;
+    _timezone["NDT"] = -5;
+    _timezone["EST"] = -10;
+    _timezone["EDT"] = -8;
+    _timezone["CST"] = -12;
+    _timezone["CDT"] = -10;
+    _timezone["MST"] = -14;
+    _timezone["MDT"] = -12;
+    _timezone["PST"] = -16;
+    _timezone["PDT"] = -14;
+    _timezone["HST"] = -20;
+    _timezone["AKST"] = -18;
+    _timezone["AKDT"] = -16;
+    _timezone["AEST"] = 20;
+    _timezone["AEDT"] = 22;
+    _timezone["ACST"] = 19;
+    _timezone["ACDT"] = 21;
+    _timezone["AWST"] = 16;
+    int hour,min,n,start,itemp;
+    string temp,s1,s2;
+    bool t12; // true-a.m. false-p.m.
+    bool nowhm;
+    cin>>n;
+    getline(cin,temp);
+    for(;n--;)
+    {
+        start = hour = min = 0;
+        s1.clear();
+        s2.clear();
+        nowhm = true; // hour
+        getline(cin,temp);
+        if(temp.length()>4 && temp.substr(0,4)==string("noon")){
+            t12 = false;
+            hour = 12;
+            start = 5;
+        }
+        else if(temp.length()>8 && temp.substr(0,8)==string("midnight")){
+            t12 = true;
+            hour = 12;
+            start = 9;
+        }else{
+            for(int i=0;i<temp.length();i++){
+                if(temp[i] == ':'){nowhm=false;continue;}
+                if(temp[i] == ' '){start=i+1;break;}
+                if(nowhm){
+                    hour *= 10;
+                    hour += temp[i] - '0';
+                }else{
+                    min *= 10;
+                    min += temp[i] - '0';
+                }
+            }
+            t12 = (temp.substr(start,4) == string("a.m."));
+            if(hour==12)
+                t12 = !t12;
+            start += 5;
+        }
+        nowhm = true;
+        for(int i=start;i<temp.length();i++){
+            if(temp[i] == ' '){nowhm=false;continue;}
+            if(nowhm){
+                s1 += temp[i];
+            }else{
+                s2 += temp[i];
+            }
+        }
+        
+        itemp = _timezone[s2] - _timezone[s1];
+        if(itemp%2){ // 奇数 有30分钟 
+            hour += int(floor(itemp/2));
+            min += 30;
+            if(min>=60){
+                min -= 60;
+                hour += 1;
+            }
+        }else{
+            hour += itemp/2;
+        }
+        if(hour>12){
+            hour -= 12;
+            t12 = !t12;
+        }else if(hour<=0){
+            hour += 12;
+            t12 = !t12;
+        }else if(hour == 12){
+            t12 = !t12;
+        }
+        
+        if(hour==12 && !min){
+            cout<<(t12?"midnight":"noon")<<endl;
+        }else{
+            cout<<hour<<':'<<min<<' '<<(t12?"a.m.":"p.m.")<<endl;
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+
+int n;
+
+ll c(int a, int b) {
+    ll k = 1;
+    for (int i = a, j = 1; j <= b; i--, j++) {
+        k = k * i / j;
+        if (k > n)return k;
+    }
+    return k;
+}
+
+bool check(int a) {
+    int l = 2 * a;
+    int r = max(n, l);
+    while (l < r) {
+        int m = l + r >> 1;
+        if (c(m, a) >= n) r = m;
+        else
+            l = m + 1;
+    }
+    if (c(r, a) != n)return false;
+    printf("%lld", 1ll * (r + 1) * r / 2 + a + 1);
+    return true;
+}
+
+int main(void)
+{
+    scanf("%d", &n);
+    for (int k = 16; ; k--) {
+        if (check(k))break;
+    }
+    return 0;
+}

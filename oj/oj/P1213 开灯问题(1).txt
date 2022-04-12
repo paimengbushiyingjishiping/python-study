@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n,k;
+    while(cin>>n>>k){
+        int lamp[n+1]={false};
+        for(int p=1;p<=k;p++){
+            for(int i=1;i<=n;i++){
+                if(i%p==0){
+                    lamp[i]=!lamp[i];
+                }
+            }
+        }
+        
+        bool isFirst = true;
+        for(int i=1;i<=n;i++){
+            if(!lamp[i]){
+                if(isFirst){
+                    isFirst = false;
+                }else{
+                    cout<<" ";
+                }
+                cout<<i;
+            }
+        }
+        cout<<endl;
+        
+    }
+   return 0;
+}

@@ -1,0 +1,39 @@
+#include<iostream> 
+#include<string.h>
+using namespace std;
+char a[500];
+int ans[500];
+int main()
+{
+    
+    while (cin>>a)
+    {
+        memset(ans,0,sizeof ans);
+        for (int i=0;i<strlen(a);++i)
+            ans[i]=a[strlen(a)-i-1]-48;
+        cin>>a;
+        for (int i=0;i<strlen(a);++i)
+            ans[i]-=a[strlen(a)-i-1]-48;
+        for (int i=0;i<=205;++i)
+        {
+            if (ans[i]>=10) 
+            {
+                ans[i+1]+=ans[i]/10;
+                ans[i]%=10;
+            } 
+            while (ans[i]<0) 
+            {
+                --ans[i+1];
+                ans[i]+=10;
+            } 
+        }
+        int l=205;
+        while (ans[l]==0&&l>0) --l;
+        for (int i=l;i>=0;--i)
+        {
+            cout<<ans[i];
+        }
+        cout<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int f(int n)
+{
+    return n%1000/100;
+}
+
+int ilen(int n)
+{
+    return log10(n)+1;
+}
+
+int main()
+{
+    string inp;
+    int sl,res,temp,iltemp;
+    while(cin>>inp)
+    {
+        sl = inp.length();
+        res = 0;
+        for(int i=0;i<291343;i++)
+        {
+            temp = i*7371;
+            iltemp = ilen(temp);
+            if(iltemp>sl)
+                break;
+            if(iltemp==sl){
+                if(f(temp)==1){
+                    if(res==0)
+                        res = i*7371;
+                    else{
+                        res = -1;
+                        break;
+                    }
+                }
+            }
+        }
+        if(res!=0 && res!=-1){
+            cout<<res<<endl;
+        }else{
+            cout<<"wrong"<<endl;
+        }
+    }
+}

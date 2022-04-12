@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int k;
+    cin>>k;
+
+    while(k-->0) {
+        int n;
+        cin>>n;
+        for(int num = 1; n > num; num++) {
+            n-=num;
+        }
+        
+        n%=9;
+        if(n==0){
+            cout<<9<<endl;
+        }else{
+            cout<<n<<endl;
+        }
+
+    }
+    return 0;
+}

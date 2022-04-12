@@ -1,0 +1,22 @@
+#include <stdio.h>
+int main() {
+    int n, x = 0, max, min;
+    scanf("%d", &n);
+    scanf("%d%d", &max, &min);
+    if(max < min)
+    {
+        x = max;
+        max = min;
+        min = x;
+    }
+    n -= 2;
+    x = 0;
+    while(n--)
+    {
+        scanf("%d", &x);
+        if(x > max)max = x;
+        if(x < min)min = x;
+    }
+    printf("%d %d", max, min);
+    return 0;
+}

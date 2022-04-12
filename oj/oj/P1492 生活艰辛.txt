@@ -1,0 +1,29 @@
+#include<iostream>
+  using namespace std;
+  int main(){
+      int n,k;
+      while(cin>>n>>k){
+          int m,t,s=0,mm=0;
+          m=n-k;
+          if(m<=0){
+              cout<<"Impossible"<<endl;
+             continue;
+         }
+         else{
+             t=m*20;
+             if(t>=200){
+                 while(mm<200){
+                     mm=mm+m;
+                     s++;
+                 }
+                 cout<<s<<endl;
+                 continue;
+             }
+             else{
+                 cout<<"Impossible"<<endl;
+                 continue;
+             }
+         }
+     }
+     return 0;
+ }
